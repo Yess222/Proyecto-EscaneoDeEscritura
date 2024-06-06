@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OCR con Flask</title>
+</head>
+<body>
+    <h1>Sube una imagen para realizar OCR</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" accept="image/*">
+        <input type="submit" value="Subir">
+    </form>
+    {% if uploaded_image %}
+        <h2>Imagen original:</h2>
+        <img src="{{ url_for('static', filename='uploaded_images/' + uploaded_image) }}" alt="Imagen Original" width="600px">
+        <h2>Imagen con OCR:</h2>
+        <img src="{{ url_for('static', filename='uploaded_images/' + result_image) }}" alt="Imagen con OCR" width="600px">
+    {% endif %}
+    {% for text in recognized_text: %}
+        <p>{{text}}</p>
+    {% endfor%}
+</body>
+</html>
